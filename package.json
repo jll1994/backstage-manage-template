@@ -7,6 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "keywords": [],
+  "author": "jianglulu <2845957073@qq.com>",
   "dependencies": {
     "core-js": "^3.6.5",
     "view-design": "^4.3.2",
