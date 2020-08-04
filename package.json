@@ -1,6 +1,7 @@
 {
-  "name": "admin-iview-template",
+  "name": "{{name}}",
   "version": "0.1.0",
+  "description": "{{description}}",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -8,7 +9,7 @@
     "lint": "vue-cli-service lint"
   },
   "keywords": [],
-  "author": "jianglulu <2845957073@qq.com>",
+  "author": "{{author}}",
   "dependencies": {
     "core-js": "^3.6.5",
     "view-design": "^4.3.2",
