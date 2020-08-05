@@ -1,7 +1,7 @@
 {
-  "name": "{{name}}",
+  "name": "name",
   "version": "0.1.0",
-  "description": "{{description}}",
+  "description": "description",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,7 +9,7 @@
     "lint": "vue-cli-service lint"
   },
   "keywords": [],
-  "author": "{{author}}",
+  "author": "author",
   "dependencies": {
     "core-js": "^3.6.5",
     "view-design": "^4.3.2",

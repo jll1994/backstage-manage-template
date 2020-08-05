@@ -1,8 +1,16 @@
 <template>
   <div class="home">
-    <h1>这是home组件</h1>
-    <Button type="primary" @click="visible=true">表单弹窗1</Button>
-    <dialog-form title="弹窗表单" :visible="visible" v-model="formParams" :formConfig="{labelWidth:60}" :formFields="formFields" @cancel="visible=false"></dialog-form>
+    <Button type="primary" @click="visible=true">弹窗表单</Button>
+    <dialog-form title="弹窗表单" :visible="visible" :formConfig="{labelWidth:80}" @cancel="visible=false" @submit="handleSubmit">
+      <BaseFormItem :fields="formFields" v-model="formParams"></BaseFormItem>
+    </dialog-form>
+    <pageHeader title="title" subtitle="this is a subtitle">
+      <template slot="extra">
+        <Button>default</Button>
+        <Button type="primary">primary</Button>
+      </template>
+      这是pageHeader里面的默认插槽
+    </pageHeader>
   </div>
 </template>
 
@@ -12,16 +20,19 @@ export default {
   data() {
     return {
       visible: false,
-      formParams: {},
+      formParams: {
+        name: "123",
+      },
       formFields: [
         {
-          key: "key1",
-          label: "label1",
+          label: "input",
+          key: "name",
+          prop: "name",
+          rules: [{ required: true, message: "请输入input", trigger: "blur" }],
         },
         {
           tag: "select",
-          key: "key2",
-          label: "label2",
+          label: "select",
           options: [
             {
               id: "1",
@@ -33,14 +44,35 @@ export default {
             },
           ],
         },
+        {
+          tag: "datePicker",
+          label: "datePicker",
+        },
+        {
+          tag: "radioGroup",
+          label: "radioGroup",
+          key: "radioGroup",
+          radios: [
+            {
+              id: "1",
+              name: "radio1",
+            },
+            {
+              id: "2",
+              name: "radio2",
+            },
+          ],
+        },
       ],
     };
+  },
+  methods: {
+    handleSubmit() {
+      console.log(this.formParams);
+    },
   },
 };
 </script>
 <style lang="less" scoped>
-h1 {
-  color: @primary-color;
-}
 </style>
 

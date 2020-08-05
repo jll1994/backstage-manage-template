@@ -3,6 +3,8 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
+import "./assets/styles/common.less";
+
 import ViewUI from "view-design";
 import "./assets/styles/iview.less";
 Vue.use(ViewUI);
