@@ -17,6 +17,10 @@ const routes = [
         path: "/description",
         component: () => import("../views/description.vue"),
       },
+      {
+        path: "/pageHeader",
+        component: () => import("../views/pageHeader.vue"),
+      },
     ],
   },
 ];

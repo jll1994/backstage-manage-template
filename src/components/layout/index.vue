@@ -1,30 +1,30 @@
 <template>
-    <Layout class="layout">
-        <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
-            <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
-                <MenuItem name="1-1">
-                <Icon type="ios-navigate"></Icon>
-                <span>Option 1</span>
-                </MenuItem>
-                <MenuItem name="1-2">
-                <Icon type="ios-search"></Icon>
-                <span>Option 2</span>
-                </MenuItem>
-                <MenuItem name="1-3">
-                <Icon type="ios-settings"></Icon>
-                <span>Option 3</span>
-                </MenuItem>
-            </Menu>
-        </Sider>
-        <Layout>
-            <Header :style="{padding: 0}" class="layout-header-bar">
-                <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>
-            </Header>
-            <Content :style="{margin: '20px', background: '#fff', minHeight: '260px',padding: '20px'}">
-                <router-view></router-view>
-            </Content>
-        </Layout>
+  <Layout class="layout">
+    <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
+      <Menu :active-name="$route.path" theme="dark" width="auto" :class="menuitemClasses">
+        <MenuItem name="/" to="/">
+        <Icon type="ios-home"></Icon>
+        <span>首页</span>
+        </MenuItem>
+        <MenuItem name="/description" to="/description">
+        <Icon type="ios-search"></Icon>
+        <span>描述列表</span>
+        </MenuItem>
+        <MenuItem name="/pageHeader" to="/pageHeader">
+        <Icon type="ios-search"></Icon>
+        <span>pageHeader</span>
+        </MenuItem>
+      </Menu>
+    </Sider>
+    <Layout>
+      <Header :style="{padding: 0}" class="layout-header-bar">
+        <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>
+      </Header>
+      <Content :style="{margin: '20px', background: '#fff', minHeight: '260px',padding: '20px'}">
+        <router-view></router-view>
+      </Content>
     </Layout>
+  </Layout>
 </template>
 <script>
 export default {
@@ -40,6 +40,9 @@ export default {
     menuitemClasses() {
       return ["menu-item", this.isCollapsed ? "collapsed-menu" : ""];
     },
+  },
+  mounted() {
+    console.log(this.$route);
   },
   methods: {
     collapsedSider() {
@@ -68,10 +71,6 @@ export default {
 }
 .menu-item span {
   display: inline-block;
-  overflow: hidden;
-  width: 69px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   vertical-align: bottom;
   transition: width 0.2s ease 0.2s;
 }

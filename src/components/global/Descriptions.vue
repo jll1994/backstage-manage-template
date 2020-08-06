@@ -1,8 +1,8 @@
 <template>
-    <div class="descriptions" :class="{'descriptions-bordered':bordered}">
-        <div class="title">{{title}}</div>
-        <slot/>
-    </div>
+  <div class="descriptions" :class="{'descriptions-bordered':bordered,'descriptions-vertical':layout==='vertical'}">
+    <div class="title">{{title}}</div>
+    <slot/>
+  </div>
 </template>
 <script>
 export default {
@@ -37,6 +37,25 @@ export default {
     text-overflow: ellipsis;
     margin-bottom: 16px;
   }
+  .descriptions-item {
+    float: left;
+    display: flex;
+    align-items: center;
+    padding-bottom: 16px;
+    .label {
+      color: #000;
+      position: relative;
+      &:after {
+        content: ":";
+        position: relative;
+        top: -0.5px;
+        margin: 0 8px 0 2px;
+      }
+    }
+    .content {
+      color: rgba(0, 0, 0, 0.65);
+    }
+  }
 }
 .descriptions-bordered {
   .descriptions-item {
@@ -55,6 +74,15 @@ export default {
       flex: 1;
       padding: 16px 24px;
       border: 1px solid #f0f0f0;
+    }
+  }
+}
+.descriptions-vertical {
+  .descriptions-item {
+    display: block;
+    .label,
+    .content {
+      margin-bottom: 12px;
     }
   }
 }

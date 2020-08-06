@@ -4,13 +4,6 @@
     <dialog-form title="弹窗表单" :visible="visible" :formConfig="{labelWidth:80}" @cancel="visible=false" @submit="handleSubmit">
       <BaseFormItem :fields="formFields" v-model="formParams"></BaseFormItem>
     </dialog-form>
-    <pageHeader title="title" subtitle="this is a subtitle">
-      <template slot="extra">
-        <Button>default</Button>
-        <Button type="primary">primary</Button>
-      </template>
-      这是pageHeader里面的默认插槽
-    </pageHeader>
   </div>
 </template>
 
