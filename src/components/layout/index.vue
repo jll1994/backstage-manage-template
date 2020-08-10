@@ -41,9 +41,6 @@ export default {
       return ["menu-item", this.isCollapsed ? "collapsed-menu" : ""];
     },
   },
-  mounted() {
-    console.log(this.$route);
-  },
   methods: {
     collapsedSider() {
       this.$refs.side1.toggleCollapse();
@@ -81,7 +78,7 @@ export default {
   font-size: 16px;
 }
 .collapsed-menu span {
-  width: 0px;
+  display: none;
   transition: width 0.2s ease;
 }
 .collapsed-menu i {

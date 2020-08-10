@@ -2,14 +2,14 @@
   <div>
     <template v-for="(item,i) in fields">
       <FormItem :label="item.label" :prop="item.prop" v-if="item.isRender === undefined ? true : item.isRender">
-        <Input v-if="!item.tag || item.tag==='input'" :type="item.type || 'text'" :value="item.key&&value[item.key]" @input="handleInput($event,item.key)" :placeholder="item.placeholder || item.label || '请输入'"></Input>
-        <Select v-else-if="item.tag==='select'" :value="item.key&&value[item.key]" @on-change="handleSelectChange($event,item.key)" :placeholder="item.placeholder || '请选择'">
+        <Input v-if="!item.tag || item.tag==='input'" :type="item.type || 'text'" :value="item.key&&value[item.key]" @input="handleInput($event,item.key)" :placeholder="item.placeholder || item.label || '请输入'" :style="{width: item.width?item.width+'px':'100%'}"></Input>
+        <Select v-else-if="item.tag==='select'" :value="item.key&&value[item.key]" @on-change="handleSelectChange($event,item.key)" :placeholder="item.placeholder || '请选择'" :style="{width: item.width?item.width+'px':'100%'}">
           <Option v-for="(option,index) in item.options || ajaxOptions" :key="index" :value="getOptionValuekey(option,item)">{{option[item.optionNamekey || 'name']}}</Option>
         </Select>
         <RadioGroup v-else-if="item.tag==='radioGroup'" :value="item.key&&value[item.key]" @on-change="handleChangeRadioGroup($event,item.key)">
           <Radio v-for="(radio,index) in item.radios" :key="index" :label="radio.id">{{radio.name}}</Radio>
         </RadioGroup>
-        <DatePicker v-else-if="item.tag === 'datePicker'" :value="item.key&&value[item.key]" @on-change="handleChangeDate($event,item.key)" :type="item.dateType" :format="item.format" :options="item.dateOptions" :placeholder="item.placeholder || '请选择时间'" style="width:100%" clearable></DatePicker>
+        <DatePicker v-else-if="item.tag === 'datePicker'" :value="item.key&&value[item.key]" @on-change="handleChangeDate($event,item.key)" :type="item.dateType" :format="item.format" :options="item.dateOptions" :placeholder="item.placeholder || '请选择时间'" :style="{width: item.width?item.width+'px':'100%'}" clearable></DatePicker>
         <span v-else>未知控件类型</span>
       </FormItem>
     </template>
@@ -90,7 +90,7 @@ export default {
       const formData = { ...this.value };
       this.fields.forEach(({ key, value = "" }) => {
         if (key) {
-          value = formData[key];
+          value = formData[key] || "";
           formData[key] = value;
         }
       });
@@ -120,21 +120,55 @@ export default {
         });
       }
     },
+    // 向上查找最近指定的组件
+    findComponentDownward(context, componentName) {
+      let parent = context.$parent;
+      let name = parent.$options.name;
+      while (parent && (!name || [componentName].indexOf(name) < 0)) {
+        parent = parent.$parent;
+        if (parent) name = parent.$options.name;
+      }
+      return parent;
+    },
     handleInput(val, key) {
       val = val.replace(/\s+/g, "");
-      key && this.$emit("input", { ...this.value, [key]: val });
+      let model = { ...this.value, [key]: val };
+      key && this.$emit("input", model);
+      const dialogFormComponent = this.findComponentDownward(
+        this,
+        "dialogForm"
+      );
+      dialogFormComponent && (dialogFormComponent.formModel = model);
     },
     handleSelectChange(val, key) {
       if (key) {
         this.$emit("change-select", val, key);
-        this.$emit("input", { ...this.value, [key]: val });
+        let model = { ...this.value, [key]: val };
+        this.$emit("input", model);
+        const dialogFormComponent = this.findComponentDownward(
+          this,
+          "dialogForm"
+        );
+        dialogFormComponent && (dialogFormComponent.formModel = model);
       }
     },
     handleChangeRadioGroup(val, key) {
-      key && this.$emit("input", { ...this.value, [key]: val });
+      let model = { ...this.value, [key]: val };
+      key && this.$emit("input", model);
+      const dialogFormComponent = this.findComponentDownward(
+        this,
+        "dialogForm"
+      );
+      dialogFormComponent && (dialogFormComponent.formModel = model);
     },
     handleChangeDate(val, key) {
-      key && this.$emit("input", { ...this.value, [key]: val });
+      let model = { ...this.value, [key]: val };
+      key && this.$emit("input", model);
+      const dialogFormComponent = this.findComponentDownward(
+        this,
+        "dialogForm"
+      );
+      dialogFormComponent && (dialogFormComponent.formModel = model);
     },
   },
 };
