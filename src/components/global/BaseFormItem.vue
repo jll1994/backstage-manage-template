@@ -33,6 +33,7 @@
  * }
  */
 import { isType } from "@/utils/index";
+import { findComponentDownward } from "@/utils/assist";
 export default {
   name: "baseFormItem",
   data() {
@@ -120,54 +121,33 @@ export default {
         });
       }
     },
-    // 向上查找最近指定的组件
-    findComponentDownward(context, componentName) {
-      let parent = context.$parent;
-      let name = parent.$options.name;
-      while (parent && (!name || [componentName].indexOf(name) < 0)) {
-        parent = parent.$parent;
-        if (parent) name = parent.$options.name;
-      }
-      return parent;
-    },
     handleInput(val, key) {
       val = val.replace(/\s+/g, "");
       let model = { ...this.value, [key]: val };
       key && this.$emit("input", model);
-      const dialogFormComponent = this.findComponentDownward(
-        this,
-        "dialogForm"
-      );
-      dialogFormComponent && (dialogFormComponent.formModel = model);
+      this.changeFormModel(model);
     },
     handleSelectChange(val, key) {
       if (key) {
         this.$emit("change-select", val, key);
         let model = { ...this.value, [key]: val };
         this.$emit("input", model);
-        const dialogFormComponent = this.findComponentDownward(
-          this,
-          "dialogForm"
-        );
-        dialogFormComponent && (dialogFormComponent.formModel = model);
+        this.changeFormModel(model);
       }
     },
     handleChangeRadioGroup(val, key) {
       let model = { ...this.value, [key]: val };
       key && this.$emit("input", model);
-      const dialogFormComponent = this.findComponentDownward(
-        this,
-        "dialogForm"
-      );
-      dialogFormComponent && (dialogFormComponent.formModel = model);
+      this.changeFormModel(model);
     },
     handleChangeDate(val, key) {
       let model = { ...this.value, [key]: val };
       key && this.$emit("input", model);
-      const dialogFormComponent = this.findComponentDownward(
-        this,
-        "dialogForm"
-      );
+      this.changeFormModel(model);
+    },
+    // 查找指定上级组件，并修改组件data中的数据
+    changeFormModel(model) {
+      const dialogFormComponent = findComponentDownward(this, "dialogForm");
       dialogFormComponent && (dialogFormComponent.formModel = model);
     },
   },

@@ -11,6 +11,8 @@
         <Button>导出</Button>
       </template>
     </filter-group>
+
+    <base-table :dataContent="tableData" :cols="cols"></base-table>
   </div>
 </template>
 
@@ -95,6 +97,27 @@ export default {
               name: "类型2",
             },
           ],
+        },
+      ],
+      tableData: [
+        {
+          id: 1,
+          name: "张珊",
+        },
+        {
+          id: 2,
+          name: "王哈桑",
+        },
+        {
+          id: 3,
+          name: "李四",
+        },
+      ],
+      cols: [
+        {
+          title: "姓名",
+          align: "center",
+          key: "name",
         },
       ],
     };
