@@ -4,7 +4,14 @@
     <dialog-form title="弹窗表单" :visible="visible" :formConfig="{labelWidth:80}" @cancel="visible=false" @submit="handleSubmit">
       <BaseFormItem :fields="formFields" v-model="formParams"></BaseFormItem>
     </dialog-form>
-    <filter-group :labelWidth="68">
+    <filter-group :formConfig="{labelWidth:68}">
+      <BaseFormItem :fields="filterFields" v-model="filterParams"></BaseFormItem>
+      <template v-slot:extra>
+        <Button type="primary">新增</Button>
+        <Button>导出</Button>
+      </template>
+    </filter-group>
+    <filter-group :formConfig="{labelPosition:'top'}">
       <BaseFormItem :fields="filterFields" v-model="filterParams"></BaseFormItem>
       <template v-slot:extra>
         <Button type="primary">新增</Button>

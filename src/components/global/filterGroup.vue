@@ -1,23 +1,23 @@
 <template>
-    <Row type='flex' align='middle' class="portlet-filter">
-        <Col class="portlet-filter__form">
-        <Form inline :label-width='labelWidth'>
-            <slot></slot>
-            <Button type="primary" @click="search">查询</Button>
-        </Form>
-        </Col>
-        <Col class="portlet-filter__extra">
-        <slot name="extra"></slot>
-        </Col>
-    </Row>
+  <Row type='flex' align='middle' class="portlet-filter">
+    <Col class="portlet-filter__form">
+    <Form inline :label-width="formConfig.labelWidth" :label-position="formConfig.labelPosition" :label-colon="formConfig.labelColon || false">
+      <slot></slot>
+      <Button type="primary" @click="search">查询</Button>
+    </Form>
+    </Col>
+    <Col class="portlet-filter__extra">
+    <slot name="extra"></slot>
+    </Col>
+  </Row>
 </template>
 <script>
 export default {
   name: "filterGroup",
   props: {
-    labelWidth: {
-      type: Number,
-      default: 0,
+    formConfig: {
+      type: Object,
+      default: () => ({}),
     },
   },
   methods: {
@@ -44,8 +44,12 @@ export default {
       display: flex;
       align-items: center;
     }
+    /deep/ .ivu-form.ivu-form-label-top.ivu-form-inline {
+      display: flex;
+      align-items: flex-end;
+    }
     /deep/ .ivu-form-item {
-      margin: 0;
+      margin-bottom: 0;
     }
     /deep/ .ivu-btn {
       vertical-align: middle;
