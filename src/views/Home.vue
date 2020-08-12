@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import http from "@/api";
 export default {
   name: "Home",
   data() {
@@ -128,6 +129,9 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    console.log(http);
   },
   methods: {
     handleSubmit() {

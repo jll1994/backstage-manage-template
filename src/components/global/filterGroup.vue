@@ -52,7 +52,6 @@ export default {
       margin-bottom: 0;
     }
     /deep/ .ivu-btn {
-      vertical-align: middle;
       margin-left: 10px;
     }
   }
