@@ -72,3 +72,6 @@ myServer.prototype.sendMes = function(moduleName, name, url, config) {
   }
 };
 export default new myServer();
+
+
+

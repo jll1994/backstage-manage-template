@@ -18,8 +18,15 @@
         <Button>导出</Button>
       </template>
     </filter-group>
-
     <base-table :dataContent="tableData" :cols="cols"></base-table>
+    <result status="error" title="提交失败" subtitle="提交失败，请向相关部门反馈信息">
+      <template #extra>
+        <div>信息提交哈啊哈</div>
+      </template>
+      <template #actions>
+        <Button type="primary">返回修改</Button>
+      </template>
+    </result>
   </div>
 </template>
 
