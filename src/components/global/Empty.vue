@@ -1,15 +1,16 @@
 <template>
-    <div class="empty-wrapper">
-        <div class="image">
-            <img :src="src" alt="" :style="imageStyle">
-        </div>
-        <p class="desc" v-if="desc">
-            <slot name="desc">{{desc}}</slot>
-        </p>
-        <div class="extra" v-if="$slots.extra">
-            <slot name="extra"></slot>
-        </div>
+  <div class="empty-wrapper">
+    <div class="image">
+      <img :src="src" alt="" :style="imageStyle">
     </div>
+    <p class="desc">
+      {{desc}}
+      <slot name="desc" v-if="desc"></slot>
+    </p>
+    <div class="extra" v-if="$slots.extra">
+      <slot name="extra"></slot>
+    </div>
+  </div>
 </template>
 <script>
 import empty from "@images/empty.png";
@@ -20,7 +21,7 @@ export default {
       default: empty,
     },
     imageStyle: {
-      type: Object, 
+      type: Object,
       default: () => ({}),
     },
     desc: {

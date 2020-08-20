@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div>
     <Button type="primary" @click="visible=true">弹窗表单</Button>
     <dialog-form title="弹窗表单" :visible="visible" :formConfig="{labelWidth:80}" @cancel="visible=false" @submit="handleSubmit">
       <BaseFormItem :fields="formFields" v-model="formParams"></BaseFormItem>
@@ -32,13 +32,29 @@
         <Button type="primary">去首页</Button>
       </template>
     </empty>
+    <Row style="background:#eee;padding:20px">
+      <Col span="6">
+      <Card>
+        <statistic title="Feekbook" value="11" suffix="%"></statistic>
+      </Card>
+      </Col>
+      <Col span="6" offset="1">
+      <Card>
+        <statistic title="Feekbook" :value="11" suffix="%" :valueStyle="{color: '#3f8600'}">
+          <template #prefix>
+            <Icon type="md-arrow-up" size="24" />
+          </template>
+        </statistic>
+      </Card>
+      </Col>
+    </Row>
   </div>
 </template>
 
 <script>
 import http from "@/api";
 export default {
-  name: "",
+  name: "home",
   data() {
     return {
       visible: false,
