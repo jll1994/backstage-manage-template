@@ -1,26 +1,38 @@
 <template>
-    <div class="result-wrapper">
-        <div class="icon" :class="[`icon-${status}`]">
-            <Icon :type="iconType(status)" />
-        </div>
-        <div class="title" v-if="title">{{title}}</div>
-        <div class="subtitle" v-if="subtitle">{{subtitle}}</div>
-        <div class="extra" v-if="$slots.extra">
-            <slot name="extra"></slot>
-        </div>
-        <div class="actions" v-if="$slots.actions">
-            <slot name="actions"></slot>
-        </div>
+  <div class="result-wrapper">
+    <div class="icon" :class="[`icon-${getStatus(status)}`]">
+      <img v-if="imgSrc" :src="imgSrc" alt="">
+      <Icon v-else :type="iconType(status)" />
     </div>
+    <div class="title" v-if="title">{{title}}</div>
+    <div class="subtitle" v-if="subtitle">{{subtitle}}</div>
+    <div class="extra" v-if="$slots.extra">
+      <slot name="extra"></slot>
+    </div>
+    <div class="actions" v-if="$slots.actions">
+      <slot name="actions"></slot>
+    </div>
+  </div>
 </template>
 <script>
+import img403 from "@images/403.png";
+import img404 from "@images/404.png";
+import img500 from "@images/500.png";
 export default {
   props: {
     status: {
       type: String,
       default: "info",
       validator: value => {
-        return ["info", "success", "warning", "error"].includes(value);
+        return [
+          "info",
+          "success",
+          "warning",
+          "error",
+          "403",
+          "404",
+          "500",
+        ].includes(value);
       },
     },
     title: {
@@ -31,6 +43,15 @@ export default {
     },
   },
   computed: {
+    getStatus() {
+      return function(status) {
+        if (["403", "404", "500"].includes(status)) {
+          return "image";
+        } else {
+          return status;
+        }
+      };
+    },
     iconType() {
       return function(type) {
         let obj = {
@@ -41,6 +62,14 @@ export default {
         };
         return obj[type];
       };
+    },
+    imgSrc() {
+      let obj = {
+        "403": img403,
+        "404": img404,
+        "500": img500,
+      };
+      return obj[this.status] || "";
     },
   },
 };
@@ -62,6 +91,12 @@ export default {
       line-height: 72px;
       background: #1890ff;
       border-radius: 50%;
+    }
+  }
+  .icon-image {
+    margin-bottom: 24px;
+    img {
+      width: 300px;
     }
   }
   .icon-success i {

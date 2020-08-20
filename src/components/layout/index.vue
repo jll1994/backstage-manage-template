@@ -20,7 +20,7 @@
       <Header :style="{padding: 0}" class="layout-header-bar">
         <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>
       </Header>
-      <Content :style="{margin: '20px', background: '#fff', minHeight: '260px',padding: '20px'}">
+      <Content :style="{margin: '20px', background: '#fff', padding: '20px'}">
         <router-view></router-view>
       </Content>
     </Layout>

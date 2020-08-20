@@ -19,7 +19,7 @@
       </template>
     </filter-group>
     <base-table :dataContent="tableData" :cols="cols"></base-table>
-    <result status="error" title="提交失败" subtitle="提交失败，请向相关部门反馈信息">
+    <result status="404" title="404" subtitle="页面没有找到，跑到火星上面去了">
       <template #extra>
         <div>信息提交哈啊哈</div>
       </template>
@@ -27,6 +27,11 @@
         <Button type="primary">返回修改</Button>
       </template>
     </result>
+    <empty>
+      <template #extra>
+        <Button type="primary">去首页</Button>
+      </template>
+    </empty>
   </div>
 </template>
 
