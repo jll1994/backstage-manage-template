@@ -38,7 +38,7 @@
 <script>
 import http from "@/api";
 export default {
-  name: "Home",
+  name: "",
   data() {
     return {
       visible: false,

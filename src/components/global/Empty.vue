@@ -20,7 +20,7 @@ export default {
       default: empty,
     },
     imageStyle: {
-      type: Object,
+      type: Object, 
       default: () => ({}),
     },
     desc: {

@@ -1,6 +1,10 @@
 <template>
   <Layout class="layout">
-    <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
+    <Sider ref="sider" hide-trigger collapsible :width="256" :collapsed-width="78" v-model="isCollapsed">
+      <div class="logo-con">
+        <img src="@images/logo.png" alt="">
+        <span>Back Manage System</span>
+      </div>
       <Menu :active-name="$route.path" theme="dark" width="auto" :class="menuitemClasses">
         <MenuItem name="/" to="/">
         <Icon type="ios-home"></Icon>
@@ -10,7 +14,7 @@
         <Icon type="ios-search"></Icon>
         <span>描述列表</span>
         </MenuItem>
-        <MenuItem name="/pageHeader" to="/pageHeader">
+        <MenuItem name="/pHeader" to="/pHeader">
         <Icon type="ios-search"></Icon>
         <span>pageHeader</span>
         </MenuItem>
@@ -25,7 +29,7 @@
       </Content>
     </Layout>
   </Layout>
-</template>
+</template> 
 <script>
 export default {
   data() {
@@ -43,7 +47,7 @@ export default {
   },
   methods: {
     collapsedSider() {
-      this.$refs.side1.toggleCollapse();
+      this.$refs.sider.toggleCollapse();
     },
   },
 };
@@ -55,6 +59,23 @@ export default {
   position: relative;
   border-radius: 4px;
   overflow: hidden;
+  .logo-con {
+    padding: 15px 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    img {
+      width: 34px;
+    }
+    span {
+      margin-left: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
   .layout-header-bar {
     background: #fff;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);

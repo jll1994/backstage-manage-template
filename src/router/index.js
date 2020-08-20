@@ -1,27 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Layout from "@components/layout/index";
-
+import configRouters from "./routers";
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
     component: Layout,
-    children: [
-      {
-        path: "/",
-        component: () => import("../views/Home.vue"),
-      },
-      {
-        path: "/description",
-        component: () => import("../views/description.vue"),
-      },
-      {
-        path: "/pageHeader",
-        component: () => import("../views/pageHeader.vue"),
-      },
-    ],
+    children: configRouters,
   },
 ];
 

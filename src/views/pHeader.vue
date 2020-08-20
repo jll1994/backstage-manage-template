@@ -19,3 +19,8 @@
         </pageHeader>
     </div>
 </template>
+<script>
+export default {
+  name: "pHeader",
+};
+</script>
